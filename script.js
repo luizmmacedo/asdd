@@ -22,6 +22,10 @@ const bulletWidth = 5;
 const bulletHeight = 10;
 const bulletSpeed = 5;
 
+// Variáveis para controle do disparo contínuo
+let autoFire = false;  // Controle do disparo automático
+let autoFireInterval;   // Intervalo do disparo contínuo
+
 // Função para desenhar o jogador
 function drawPlayer() {
     ctx.fillStyle = "lightblue";
@@ -157,6 +161,9 @@ document.addEventListener("keydown", (e) => {
     if (e.key === " ") {
         fireBullet(); // Disparar um tiro
     }
+    if (e.key === "k" || e.key === "K") {
+        toggleAutoFire();  // Alternar o disparo automático
+    }
 });
 
 document.addEventListener("keyup", (e) => {
@@ -166,6 +173,21 @@ document.addEventListener("keyup", (e) => {
 // Função para disparar tiros
 function fireBullet() {
     bullets.push({ x: playerX + playerWidth / 2 - bulletWidth / 2, y: playerY });
+}
+
+// Função para alternar o disparo automático
+function toggleAutoFire() {
+    if (autoFire) {
+        // Se o modo automático está ativado, desative
+        clearInterval(autoFireInterval);
+        autoFire = false;
+        console.log("Modo contínuo de disparo desativado");
+    } else {
+        // Se o modo automático não está ativado, ative
+        autoFireInterval = setInterval(fireBullet, 100); // Dispara a cada 100ms (10 tiros por segundo)
+        autoFire = true;
+        console.log("Modo contínuo de disparo ativado");
+    }
 }
 
 // Reiniciar o jogo
