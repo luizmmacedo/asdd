@@ -9,7 +9,7 @@ let playerWidth = 50;
 let playerHeight = 30;
 let playerX = canvas.width / 2 - playerWidth / 2;
 let playerY = canvas.height - playerHeight - 10;
-let playerSpeed = 5;
+let playerSpeed = 10;
 
 let bullets = [];
 let enemies = [];
